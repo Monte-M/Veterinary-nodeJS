@@ -1,10 +1,9 @@
-
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
 
 // routes
-const productsRoute = require("./API/products");
+const petsRoute = require("./Routes/v1/pets");
 
 const PORT = process.env.SERVER_PORT || 3000;
 
@@ -27,6 +26,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.use("/products", productsRoute);
+app.use("/v1/pets", petsRoute);
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`));

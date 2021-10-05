@@ -4,6 +4,9 @@ const mysql = require("mysql2/promise");
 
 // routes
 const petsRoute = require("./Routes/v1/pets");
+const medicationsRoute = require("./Routes/v1/medications");
+const logsRoute = require("./Routes/v1/logs");
+const prescriptionsRoute = require("./Routes/v1/prescriptions");
 
 const PORT = process.env.SERVER_PORT || 3000;
 
@@ -27,5 +30,8 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/v1/pets", petsRoute);
+app.use("/v1/meds", medicationsRoute);
+app.use("/v1/logs", logsRoute);
+app.use("/v1/prescriptions", prescriptionsRoute);
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`));

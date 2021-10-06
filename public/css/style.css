@@ -154,8 +154,10 @@ footer {
   color: gray;
 }
 
-.logs {
+.logs,
+.pres {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .logs-container {
@@ -179,4 +181,9 @@ h4 {
 .logs-container h3 {
   margin: 10px;
   font-weight: bolder;
+}
+
+.title {
+  margin: 10px 50px;
+  color: gray;
 }

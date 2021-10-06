@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    console.log("query", req.query);
     const conn = await mysql.createConnection(dbConfig);
     let sql = `SELECT * FROM pets WHERE archived = 0`;
     const { pet } = req.query;

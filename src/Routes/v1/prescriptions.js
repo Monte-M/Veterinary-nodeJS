@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
     WHERE prescriptions.pet_id = ?
       `;
     const [result] = await conn.query(sql, id);
-    res.send({ msg: "got pets with logs", result });
+    res.send({ msg: "got prescriptions", result });
     await conn.end();
   } catch (error) {
     console.log("/ got error ", error.message);

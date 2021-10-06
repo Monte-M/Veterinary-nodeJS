@@ -32,6 +32,6 @@ app.get("/", async (req, res) => {
 app.use("/v1/pets", petsRoute);
 app.use("/v1/meds", medicationsRoute);
 app.use("/v1/logs", logsRoute);
-app.use("/v1/prescriptions", prescriptionsRoute);
+app.use("/v1/pres", prescriptionsRoute);
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`));

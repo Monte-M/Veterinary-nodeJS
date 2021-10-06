@@ -1,23 +1,22 @@
 const express = require("express");
 const mysql = require("mysql2/promise");
 const dbConfig = require("../../dbConfig");
+const joi = require("joi");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const conn = await mysql.createConnection(dbConfig);
     const sql = `
-      SELECT prescriptions.pet_id AS 'pet ID', prescriptions.comment,
-      pets.name, pets.dob AS 'date of birth', pets.client_email AS 'client email',
-      medications.name AS 'medication name', medications.description
-      FROM prescriptions
-      INNER JOIN pets
-      ON prescriptions.pet_id = pets.id
-      INNER JOIN medications
-      ON prescriptions.medication_id = medications.id
+    SELECT *
+    FROM prescriptions
+    INNER JOIN medications
+    ON medications.id = prescriptions.medication_id
+    WHERE prescriptions.pet_id = ?
       `;
-    const [result] = await conn.query(sql);
+    const [result] = await conn.query(sql, id);
     res.send({ msg: "got pets with logs", result });
     await conn.end();
   } catch (error) {
@@ -27,6 +26,27 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  const presSchema = joi.object({
+    medication_id: joi.number().required(),
+    pet_id: joi.number().required(),
+    comment: joi.string().min(3).required(),
+  });
+
+  let formValid = false;
+  try {
+    const validationResult = await presSchema.validateAsync(req.body, {
+      abortEarly: false,
+    });
+    formValid = true;
+  } catch (err) {
+    formValid = false;
+    console.log("err", err);
+    res.status(400).send({
+      error: "please check inputs",
+      err: err.details,
+    });
+  }
+  if (!formValid) return;
   console.log(req.body);
   try {
     const conn = await mysql.createConnection(dbConfig);

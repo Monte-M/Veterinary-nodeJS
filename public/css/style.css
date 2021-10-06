@@ -64,6 +64,7 @@ nav {
 
 .pets {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .pet-container {
@@ -91,9 +92,13 @@ h4 {
 
 .buttons {
   margin: 10px;
+  display: flex;
 }
 
 .pet-container button:first-child {
+  display: flex;
+  justify-content: center;
+  margin-right: 5px;
   background-color: rgb(255, 136, 0);
   width: 100px;
   padding: 5px;
@@ -149,11 +154,11 @@ footer {
   color: gray;
 }
 
-.medications {
+.logs {
   display: flex;
 }
 
-.medication-container {
+.logs-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,13 +170,13 @@ footer {
   border-radius: 5px;
 }
 
-.medication-container h3,
+.logs-container h3,
 h4 {
   color: gray;
   font-weight: normal;
 }
 
-.medication-container h3 {
+.logs-container h3 {
   margin: 10px;
   font-weight: bolder;
 }

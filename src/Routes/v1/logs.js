@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
+  if (!id) return res.status(400).send({ error: "no id given" });
   try {
     const conn = await mysql.createConnection(dbConfig);
     const sql = `

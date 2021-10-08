@@ -16,7 +16,7 @@ const renderPets = (arr, dest) => {
     (petsItem) => `
         <div class="pet-container" id="${petsItem.id}">
             <h3>${petsItem.name}</h3>
-            <h4>${petsItem.dob}</h4>
+            <h4>${new Date(petsItem.dob).toLocaleDateString("sv-SE")}</h4>
             <h4>${petsItem.client_email}</h4>
             <div class="buttons">
             <button class="logs">VIEW LOG</button>

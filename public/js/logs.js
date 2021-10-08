@@ -44,7 +44,13 @@ const renderPres = (arr, dest) => {
         <div class="logs-container">
           <h3>Description</h3>
           <h4>${presItem.comment}</h4>
-          <h4>${presItem.timestamp}}</h4>
+          <h4>${new Date(presItem.timestamp).toLocaleDateString("sv-SE", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}</h4>
         </div>
     `
   );

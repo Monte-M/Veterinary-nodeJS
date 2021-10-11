@@ -7,10 +7,10 @@ const logsEl = document.querySelector(".logs");
 const presEl = document.querySelector(".pres");
 const logsBtn = document.querySelector(".logs-btn");
 const presBtn = document.querySelector(".pres-btn");
+const petName = document.querySelector(".petName");
 
 const getLogs = async () => {
   const id = localStorage.getItem("id");
-  console.log(id);
   const resp = await fetch(`${url}/v1/logs/${id}`);
   const data = await resp.json();
   console.log("data", data);
@@ -19,11 +19,18 @@ const getLogs = async () => {
 
 const getPres = async () => {
   const id = localStorage.getItem("id");
-  console.log(id);
   const resp = await fetch(`${url}/v1/pres/${id}`);
   const data = await resp.json();
   console.log("data", data);
   return data.result;
+};
+
+const getPet = async () => {
+  const id = localStorage.getItem("id");
+  const resp = await fetch(`${url}/v1/pets/${id}`);
+  const data = await resp.json();
+  console.log("data", data.result);
+  petName.innerHTML = `<h1 class="petName">${data.result[0].name}: Health Records</h1>`;
 };
 
 const renderLogs = (arr, dest) => {
@@ -60,6 +67,7 @@ const renderPres = (arr, dest) => {
 const init = async () => {
   const logs = await getLogs();
   const pres = await getPres();
+  const pet = await getPet();
   renderLogs(logs, logsEl);
   renderPres(pres, presEl);
 };

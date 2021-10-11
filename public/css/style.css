@@ -187,3 +187,7 @@ h4 {
   margin: 10px 50px;
   color: gray;
 }
+
+.petName {
+  font-size: 24px;
+}

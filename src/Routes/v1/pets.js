@@ -26,6 +26,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  if (!id) return res.status(400).send({ error: "no id given" });
+  try {
+    const conn = await mysql.createConnection(dbConfig);
+    const sql = `
+    SELECT *
+    FROM pets
+    WHERE id = ?
+      `;
+    const [result] = await conn.query(sql, id);
+    res.send({ msg: "got pet", result });
+    await conn.end();
+  } catch (error) {
+    console.log("/ got error ", error.message);
+    res.status(500).send({ error: "error getting pet" });
+  }
+});
+
 router.post("/", async (req, res) => {
   const petSchema = joi.object({
     name: joi.string().min(3).max(50).required(),
